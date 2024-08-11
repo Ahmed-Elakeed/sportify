@@ -7,7 +7,7 @@ import eg.mos.sportify.domain.enums.PlayerRole;
 import eg.mos.sportify.dto.AddCompetitionDTO;
 import eg.mos.sportify.dto.AddPlayerCompetitionDTO;
 import eg.mos.sportify.dto.ApiResponse;
-import eg.mos.sportify.event.CompetitionAddedEvent;
+
 import eg.mos.sportify.exception.AuthorizationException;
 import eg.mos.sportify.exception.NotFoundException;
 import eg.mos.sportify.repository.CompetitionRepository;
@@ -29,6 +29,10 @@ public class CompetitionService {
     private final ApplicationEventPublisher eventPublisher;
 
 
+    /**
+     * @author Ahmed Elakeed
+     * @return ApiResponse<String>
+     */
     public ApiResponse<String> addCompetition(AddCompetitionDTO addCompetitionDTO) {
         Optional<User> optionalUser = userRepository.findById(addCompetitionDTO.getUserId());
         if (!optionalUser.isPresent()) {
