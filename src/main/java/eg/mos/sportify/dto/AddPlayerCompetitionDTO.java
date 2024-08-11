@@ -3,22 +3,17 @@ package eg.mos.sportify.dto;
 
 import eg.mos.sportify.domain.enums.PlayerRole;
 import lombok.*;
-import org.springframework.context.ApplicationEvent;
 
 
-@Getter
-@Setter
+
+
+@Data
+@AllArgsConstructor
+@NoArgsConstructor
 @Builder
-public class AddPlayerCompetitionDTO extends ApplicationEvent {
+public class AddPlayerCompetitionDTO {
 
     private Long competitionId;
     private Long userId;
     private PlayerRole role;
-
-    public AddPlayerCompetitionDTO(Long competitionId, Long userId, PlayerRole role) {
-        super("DefaultSource");
-        this.competitionId = competitionId;
-        this.userId = userId;
-        this.role = role;
-    }
 }

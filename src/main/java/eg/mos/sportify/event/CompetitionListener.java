@@ -14,7 +14,13 @@ public class CompetitionListener {
     private final PlayerCompetitionService playerCompetitionService;
 
     @EventListener
-    public void addCompetitionPostProcess(AddPlayerCompetitionDTO addPlayerCompetitionDTO){
-        this.playerCompetitionService.addPlayerToCompetition(addPlayerCompetitionDTO);
+    public void addCompetitionPostProcess(CompetitionAddedEvent competitionAddedEvent){
+        this.playerCompetitionService.addPlayerToCompetition(
+                AddPlayerCompetitionDTO.builder()
+                        .competitionId(competitionAddedEvent.getCompetitionId())
+                        .userId(competitionAddedEvent.getUserId())
+                        .role(competitionAddedEvent.getPlayerRole())
+                        .build()
+        );
     }
 }

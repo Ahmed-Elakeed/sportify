@@ -47,13 +47,7 @@ public class CompetitionService {
                             .auditData(new AuditData())
                             .build()
             );
-            this.eventPublisher.publishEvent(
-                    AddPlayerCompetitionDTO.builder()
-                            .competitionId(competition.getCompetitionId())
-                            .userId(addCompetitionDTO.getUserId())
-                            .role(PlayerRole.ORGANIZER)
-                            .build()
-            );
+            this.eventPublisher.publishEvent(new CompetitionAddedEvent(this, competition.getCompetitionId(), addCompetitionDTO.getUserId(), PlayerRole.ORGANIZER));
             return ApiResponse.<String>builder()
                     .success(true)
                     .message("Competition added")

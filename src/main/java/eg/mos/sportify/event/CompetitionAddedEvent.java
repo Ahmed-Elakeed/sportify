@@ -1,6 +1,7 @@
 package eg.mos.sportify.event;
 
 import eg.mos.sportify.domain.enums.PlayerRole;
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationEvent;
