@@ -1,4 +1,4 @@
-package eg.mos.sportify.dto;
+package eg.mos.sportify.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AuthRequest {
+public class UserAuthenticationDTO {
     private String username;
     private String password;
 }

@@ -1,13 +1,13 @@
 package eg.mos.sportify.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import eg.mos.sportify.domain.enums.CompetitionStatus;
 import javax.persistence.*;
 
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 
 @Entity
@@ -32,10 +32,8 @@ public class Competition {
 
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false)
+    @JsonIgnore
     private User admin;
-
-    @OneToMany(mappedBy = "competition")
-    private Set<PlayerCompetition> playerCompetitions;
 
     @Embedded
     private AuditData auditData;

@@ -1,4 +1,4 @@
-package eg.mos.sportify.dto;
+package eg.mos.sportify.dto.player_competition;
 
 
 import eg.mos.sportify.domain.enums.PlayerRole;

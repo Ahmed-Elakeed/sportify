@@ -1,4 +1,4 @@
-package eg.mos.sportify.dto;
+package eg.mos.sportify.dto.competition;
 
 import eg.mos.sportify.domain.enums.CompetitionStatus;
 import lombok.AllArgsConstructor;

@@ -29,6 +29,8 @@ public class PlayerCompetition {
     @Enumerated(EnumType.STRING)
     private PlayerRole role;
 
+    private Integer score;
+
     @Embedded
     private AuditData auditData;
 }

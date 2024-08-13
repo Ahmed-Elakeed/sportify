@@ -1,4 +1,4 @@
-package eg.mos.sportify.dto;
+package eg.mos.sportify.dto.user;
 
 
 import eg.mos.sportify.domain.enums.Gender;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class UserRegistrationRequest {
+public class UserRegistrationDTO {
     private String username;
     private String email;
     private String password;

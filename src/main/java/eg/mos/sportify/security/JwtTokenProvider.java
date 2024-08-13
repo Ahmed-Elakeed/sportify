@@ -1,7 +1,7 @@
 package eg.mos.sportify.security;
 
 
-import eg.mos.sportify.dto.AuthRequest;
+import eg.mos.sportify.dto.user.UserAuthenticationDTO;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -40,10 +40,10 @@ public class JwtTokenProvider {
         this.userDetailsService = userDetailsService;
     }
 
-    public String generateToken(AuthRequest authRequest) {
+    public String generateToken(UserAuthenticationDTO userAuthenticationDTO) {
         return Jwts.builder()
-                .claim("username", authRequest.getUsername())
-                .setSubject(authRequest.getUsername())
+                .claim("username", userAuthenticationDTO.getUsername())
+                .setSubject(userAuthenticationDTO.getUsername())
                 .setId(UUID.randomUUID().toString())
                 .setIssuedAt(new Date())
                 .setExpiration(Date.from(Instant.now().plus(1L, ChronoUnit.HOURS)))

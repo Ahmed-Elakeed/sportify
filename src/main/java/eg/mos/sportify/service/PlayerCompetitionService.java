@@ -5,7 +5,7 @@ import eg.mos.sportify.domain.AuditData;
 import eg.mos.sportify.domain.Competition;
 import eg.mos.sportify.domain.PlayerCompetition;
 import eg.mos.sportify.domain.User;
-import eg.mos.sportify.dto.AddPlayerCompetitionDTO;
+import eg.mos.sportify.dto.player_competition.AddPlayerCompetitionDTO;
 import eg.mos.sportify.dto.ApiResponse;
 import eg.mos.sportify.exception.AuthorizationException;
 import eg.mos.sportify.exception.NotFoundException;
@@ -27,7 +27,11 @@ public class PlayerCompetitionService {
 
 
     public ApiResponse<String> addPlayerToCompetition(AddPlayerCompetitionDTO addPlayerCompetitionDTO) {
-        User user = userRepository.findByUsername(AuthUserDetailsService.getUsernameFromToken()).get();
+        Optional<User> optionalUser = userRepository.findByUsername(AuthUserDetailsService.getUsernameFromToken());
+        if (!optionalUser.isPresent()) {
+            throw new NotFoundException("Competition organizer not found");
+        }
+        User user = optionalUser.get();
         Competition competition = user.getCreatedCompetitions()
                 .stream()
                 .filter(c -> c.getCompetitionId().equals(addPlayerCompetitionDTO.getCompetitionId()))
@@ -42,6 +46,7 @@ public class PlayerCompetitionService {
                                 .competition(competition)
                                 .player(newPlayer)
                                 .role(addPlayerCompetitionDTO.getRole())
+                                .score(0)
                                 .auditData(new AuditData())
                                 .build()
                 );

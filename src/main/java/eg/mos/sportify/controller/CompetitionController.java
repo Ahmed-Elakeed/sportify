@@ -1,7 +1,7 @@
 package eg.mos.sportify.controller;
 
 
-import eg.mos.sportify.dto.AddCompetitionDTO;
+import eg.mos.sportify.dto.competition.AddCompetitionDTO;
 import eg.mos.sportify.dto.ApiResponse;
 import eg.mos.sportify.service.CompetitionService;
 import lombok.RequiredArgsConstructor;
