@@ -19,7 +19,7 @@ public class CompetitionController {
     private final CompetitionService competitionService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<?>> addCompetition(@RequestBody AddCompetitionDTO addCompetitionDTO) {
+    public ResponseEntity<ApiResponse<String>> addCompetition(@RequestBody AddCompetitionDTO addCompetitionDTO) {
         return ResponseEntity.ok(this.competitionService.addCompetition(addCompetitionDTO));
     }
 }
