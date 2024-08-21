@@ -18,6 +18,6 @@ public class AddCompetitionDTO {
     private String description;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
-    private CompetitionStatus status;
+    private CompetitionStatus status = CompetitionStatus.UPCOMING;
     private Long userId;
 }
