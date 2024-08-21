@@ -6,6 +6,7 @@ import eg.mos.sportify.domain.User;
 import eg.mos.sportify.domain.enums.PlayerRole;
 import eg.mos.sportify.dto.competition.AddCompetitionDTO;
 import eg.mos.sportify.dto.ApiResponse;
+import eg.mos.sportify.dto.competition.CompetitionChangeStatusDTO;
 import eg.mos.sportify.event.CompetitionAddedEvent;
 import eg.mos.sportify.exception.AuthorizationException;
 import eg.mos.sportify.exception.NotFoundException;
@@ -30,7 +31,7 @@ public class CompetitionService {
 
     public ApiResponse<String> addCompetition(AddCompetitionDTO addCompetitionDTO) {
         Optional<User> optionalUser = userRepository.findById(addCompetitionDTO.getUserId());
-        if (!optionalUser.isPresent()) {
+        if (optionalUser.isEmpty()) {
             throw new NotFoundException("User with ID : " + addCompetitionDTO.getUserId() + " not found");
         }
         String currentAuthenticatedUsername = AuthUserDetailsService.getUsernameFromToken();
@@ -55,5 +56,23 @@ public class CompetitionService {
         }
         throw new AuthorizationException("User can add competition to only himself");
 
+    }
+
+    public ApiResponse<String> changeCompetitionStatus(CompetitionChangeStatusDTO competitionChangeStatusDTO) {
+        Optional<Competition> optionalCompetition = competitionRepository.findById(competitionChangeStatusDTO.getCompetitionId());
+        if (optionalCompetition.isEmpty()) {
+            throw new NotFoundException("Competition with ID : " + competitionChangeStatusDTO.getCompetitionId() + " not found");
+        }
+        Competition competition = optionalCompetition.get();
+        if (!Objects.equals(competition.getAdmin().getUsername(), AuthUserDetailsService.getUsernameFromToken())) {
+            throw new AuthorizationException("Only the admin of the competition can change the status");
+        }
+        competition.setStatus(competitionChangeStatusDTO.getStatus());
+        this.competitionRepository.save(competition);
+        return ApiResponse.<String>builder()
+                .success(true)
+                .message("Competition status changed")
+                .data("Status changed to " + competitionChangeStatusDTO.getStatus())
+                .build();
     }
 }
