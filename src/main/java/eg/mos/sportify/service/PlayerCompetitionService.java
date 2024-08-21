@@ -5,6 +5,7 @@ import eg.mos.sportify.domain.AuditData;
 import eg.mos.sportify.domain.Competition;
 import eg.mos.sportify.domain.PlayerCompetition;
 import eg.mos.sportify.domain.User;
+import eg.mos.sportify.domain.enums.CompetitionStatus;
 import eg.mos.sportify.dto.player_competition.PlayerScoreDTO;
 import eg.mos.sportify.dto.player_competition.AddPlayerCompetitionDTO;
 import eg.mos.sportify.dto.ApiResponse;
@@ -31,6 +32,10 @@ public class PlayerCompetitionService {
     public ApiResponse<String> addPlayerToCompetition(AddPlayerCompetitionDTO addPlayerCompetitionDTO) {
         User user = getCurrentUser();
         Competition competition = getCompetitionById(user, addPlayerCompetitionDTO.getCompetitionId());
+
+        if(competition.getStatus() != CompetitionStatus.UPCOMING){
+            throw new AuthorizationException("You can add player to upcoming competitions only");
+        }
 
         Optional<User> optionalNewPlayer = userRepository.findById(addPlayerCompetitionDTO.getUserId());
         if (optionalNewPlayer.isEmpty()) {
