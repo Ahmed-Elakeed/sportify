@@ -5,6 +5,7 @@ package eg.mos.sportify.controller;
 import eg.mos.sportify.domain.User;
 import eg.mos.sportify.dto.ApiResponse;
 import eg.mos.sportify.dto.user.UserAuthenticationDTO;
+import eg.mos.sportify.dto.user.UserCompetitionReport;
 import eg.mos.sportify.dto.user.UserRegistrationDTO;
 import eg.mos.sportify.dto.user.UserSearchDTO;
 import eg.mos.sportify.service.UserService;
@@ -39,5 +40,10 @@ public class UserController {
     @GetMapping("/search")
     public ResponseEntity<ApiResponse<List<User>>> searchUsers(@RequestBody UserSearchDTO userSearchDTO) {
         return ResponseEntity.ok(this.userService.searchUsers(userSearchDTO));
+    }
+
+    @GetMapping("/{userId}/competition-report")
+    public ResponseEntity<ApiResponse<UserCompetitionReport>> getCompetitionReport(@PathVariable Long userId) {
+        return ResponseEntity.ok(this.userService.getUserCompetitionReport(userId));
     }
 }

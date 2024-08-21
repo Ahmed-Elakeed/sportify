@@ -7,10 +7,7 @@ import eg.mos.sportify.dto.competition.CompetitionChangeStatusDTO;
 import eg.mos.sportify.service.CompetitionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/competitions")
@@ -24,7 +21,7 @@ public class CompetitionController {
         return ResponseEntity.ok(this.competitionService.addCompetition(addCompetitionDTO));
     }
 
-    @PostMapping("/change-status")
+    @PutMapping("/change-status")
     public ResponseEntity<ApiResponse<String>> changeCompetitionStatus(@RequestBody CompetitionChangeStatusDTO competitionChangeStatusDTO){
         return ResponseEntity.ok(this.competitionService.changeCompetitionStatus(competitionChangeStatusDTO));
     }

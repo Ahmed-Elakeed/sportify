@@ -22,10 +22,15 @@ public class Competition {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long competitionId;
 
+    @Column(nullable = false)
     private String name;
     private String description;
+    @Column(nullable = false)
     private LocalDateTime startDate;
+    @Column(nullable = false)
     private LocalDateTime endDate;
+    @Column(nullable = false)
+    private Integer maxScore;
 
     @Enumerated(EnumType.STRING)
     private CompetitionStatus status;

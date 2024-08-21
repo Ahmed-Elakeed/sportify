@@ -42,6 +42,7 @@ public class CompetitionService {
                             .description(addCompetitionDTO.getDescription())
                             .startDate(addCompetitionDTO.getStartDate())
                             .endDate(addCompetitionDTO.getEndDate())
+                            .maxScore(addCompetitionDTO.getMaxScore())
                             .status(addCompetitionDTO.getStatus())
                             .admin(optionalUser.get())
                             .auditData(new AuditData())

@@ -24,7 +24,7 @@ public class PlayerCompetitionController {
         return ResponseEntity.ok(this.playerCompetitionService.addPlayerToCompetition(addPlayerCompetitionDTO));
     }
 
-    @PostMapping("/score")
+    @PutMapping("/score")
     public ResponseEntity<ApiResponse<String>> updatePLayerScore(@RequestBody @Valid PlayerScoreDTO playerScoreDTO){
         return ResponseEntity.ok(this.playerCompetitionService.updatePlayerScore(playerScoreDTO));
     }

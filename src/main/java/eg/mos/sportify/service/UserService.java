@@ -1,13 +1,16 @@
 package eg.mos.sportify.service;
 
 import eg.mos.sportify.domain.AuditData;
+import eg.mos.sportify.domain.PlayerCompetition;
 import eg.mos.sportify.domain.Profile;
 import eg.mos.sportify.domain.User;
 import eg.mos.sportify.dto.ApiResponse;
 import eg.mos.sportify.dto.user.UserAuthenticationDTO;
+import eg.mos.sportify.dto.user.UserCompetitionReport;
 import eg.mos.sportify.dto.user.UserRegistrationDTO;
 import eg.mos.sportify.dto.user.UserSearchDTO;
 import eg.mos.sportify.exception.NotFoundException;
+import eg.mos.sportify.repository.PlayerCompetitionRepository;
 import eg.mos.sportify.repository.UserRepository;
 import eg.mos.sportify.repository.specefication.UserSpecification;
 import eg.mos.sportify.security.JwtTokenProvider;
@@ -25,6 +28,7 @@ import java.util.Optional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final PlayerCompetitionRepository playerCompetitionRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
 
@@ -109,6 +113,20 @@ public class UserService {
                 .success(true)
                 .message("Search results")
                 .data(this.userRepository.findAll(userSpecification))
+                .build();
+    }
+
+    public ApiResponse<UserCompetitionReport> getUserCompetitionReport(Long userId) {
+        List<PlayerCompetition> playerCompetitionList = this.playerCompetitionRepository.findAllByPlayerUserId(userId);
+        if(playerCompetitionList.isEmpty()) {
+            throw new NotFoundException("This player does not have any competitions");
+        }
+        UserCompetitionReport userCompetitionReport = new UserCompetitionReport();
+        userCompetitionReport.constructReport(playerCompetitionList);
+        return ApiResponse.<UserCompetitionReport>builder()
+                .success(true)
+                .message("User competition report")
+                .data(userCompetitionReport)
                 .build();
     }
 }

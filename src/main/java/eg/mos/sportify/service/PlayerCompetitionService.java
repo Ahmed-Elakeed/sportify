@@ -12,6 +12,7 @@ import eg.mos.sportify.dto.ApiResponse;
 import eg.mos.sportify.dto.player_competition.RemovePlayerFromCompetitionDTO;
 import eg.mos.sportify.exception.AuthorizationException;
 import eg.mos.sportify.exception.NotFoundException;
+import eg.mos.sportify.exception.ValidationException;
 import eg.mos.sportify.repository.PlayerCompetitionRepository;
 import eg.mos.sportify.repository.UserRepository;
 import eg.mos.sportify.security.AuthUserDetailsService;
@@ -63,7 +64,8 @@ public class PlayerCompetitionService {
 
     public ApiResponse<String> updatePlayerScore(PlayerScoreDTO playerScoreDTO) {
         User user = getCurrentUser();
-        getCompetitionById(user, playerScoreDTO.getCompetitionId());
+        Competition competition = getCompetitionById(user, playerScoreDTO.getCompetitionId());
+
 
         Optional<PlayerCompetition> optionalPlayerCompetition = this.playerCompetitionRepository
                 .findByUserIdAndCompetitionId(playerScoreDTO.getUserId(), playerScoreDTO.getCompetitionId());
@@ -72,6 +74,9 @@ public class PlayerCompetitionService {
             throw new NotFoundException("This player is not assigned to this competition");
         }
 
+        if(playerScoreDTO.getScore() > competition.getMaxScore()){
+            throw new ValidationException("Score must be less than or equal to max score");
+        }
         PlayerCompetition playerCompetition = optionalPlayerCompetition.get();
         playerCompetition.setScore(playerScoreDTO.getScore());
         playerCompetition.setAuditData(AuditData.builder().createdAt(playerCompetition.getAuditData().getCreatedAt()).updatedAt(LocalDateTime.now()).build());

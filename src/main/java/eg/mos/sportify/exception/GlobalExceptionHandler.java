@@ -9,17 +9,6 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice
 public class GlobalExceptionHandler {
 
-    @ExceptionHandler(value = Exception.class)
-    public ResponseEntity<ApiResponse<String>> handleException(Exception exception) {
-        return ResponseEntity.ok(
-                ApiResponse.<String>builder()
-                        .success(false)
-                        .message(exception.getMessage())
-                        .data("Internal server error")
-                        .build()
-        );
-    }
-
     @ExceptionHandler(NotFoundException.class)
     public ResponseEntity<ApiResponse<String>> handleNotFoundException(NotFoundException exception) {
         return ResponseEntity.ok(
@@ -38,6 +27,28 @@ public class GlobalExceptionHandler {
                         .success(false)
                         .message(exception.getMessage())
                         .data("Authorization exception")
+                        .build()
+        );
+    }
+
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<ApiResponse<String>> handleAuthorizationException(ValidationException exception) {
+        return ResponseEntity.ok(
+                ApiResponse.<String>builder()
+                        .success(false)
+                        .message(exception.getMessage())
+                        .data("Validation exception")
+                        .build()
+        );
+    }
+
+    @ExceptionHandler(value = Exception.class)
+    public ResponseEntity<ApiResponse<String>> handleException(Exception exception) {
+        return ResponseEntity.ok(
+                ApiResponse.<String>builder()
+                        .success(false)
+                        .message(exception.getMessage())
+                        .data("Internal server error")
                         .build()
         );
     }
