@@ -1,0 +1,6 @@
+// Giving All Permission to the file
+chmod 400 sportify_app.pem
+
+
+// Copy docker-compose file from local machine to AWS EC2 instance (Public-IP -> Changeable)
+scp -i ~/Downloads/sportify_app.pem /Users/ahmedelakeed/IdeaProjects/sportify/docker-compose.yml ec2-user@52.91.21.9:/home/ec2-user/
