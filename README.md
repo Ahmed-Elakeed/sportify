@@ -1,17 +1,6 @@
 # Sportify 🏆
 **Sportify** is a comprehensive sports management backend solution, designed to streamline the management of sports teams, players, and competitions. This system is built using **Java Spring Boot**, incorporating modern backend technologies like **JWT-based authentication**, **AOP logging**, **custom exception handling**, and **RESTful APIs**. It’s a highly scalable solution ready for deployment on **AWS**, with detailed API documentation via **Swagger**.
 
-## 📜 Table of Contents
-1. [Features](#features)
-2. [Tech Stack](#tech-stack)
-3. [Setup Instructions](#setup-instructions)
-4. [API Documentation](#api-documentation)
-5. [Security](#security)
-6. [Exception Handling](#exception-handling)
-7. [Logging](#logging)
-8. [Deployment](#deployment)
-9. [Contributing](#contributing)
-
 ## ✨ Features
 - **Player Management**: Add, update, and track player stats across multiple sports.
 - **Competition Management**: Create, manage, and track competitions and team performance.
@@ -34,5 +23,5 @@
 ## ⚙️ Setup Instructions
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/yourusername/sportify.git
+   git clone https://github.com/ahmedelakeed/sportify.git
    cd sportify
