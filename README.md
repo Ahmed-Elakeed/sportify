@@ -23,5 +23,5 @@
 ## ⚙️ Setup Instructions
 1. **Clone the repository**:
    ```bash
-   git clone https://github.com/ahmedelakeed/sportify.git
+   git clone https://github.com/Ahmed-ELakeed/sportify.git
    cd sportify
