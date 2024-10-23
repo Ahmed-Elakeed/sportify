@@ -23,8 +23,7 @@ Additionally, I've implemented an **AOP logging system**, a **global exception h
 - Implementing real-time notifications for competition updates.
 - Integrating a chat feature for player interaction.
 - Adding analytics for performance insights.
-
-## SWAGGER-URL -> http://localhost:8080/swagger-ui/
+  
 
 Feel free to check it out, provide feedback, or connect if you're interested in discussing it further!
 
