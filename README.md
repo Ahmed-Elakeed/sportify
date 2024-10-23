@@ -1,11 +1,6 @@
 # Sportify 🏆
 **Sportify** is a comprehensive sports management backend solution, designed to streamline the management of sports teams, players, and competitions. This system is built using **Java Spring Boot**, incorporating modern backend technologies like **JWT-based authentication**, **AOP logging**, **custom exception handling**, and **RESTful APIs**. It’s a highly scalable solution ready for deployment on **AWS**, with detailed API documentation via **Swagger**.
 
-
-🌟 **Excited to Share My Latest Project: Sportify!** 🎉
-
-I am thrilled to announce the completion of **Sportify**, a comprehensive platform designed to streamline competition management and enhance user experiences in the sports domain. This project incorporates a range of features tailored to players, organizers, and competition management.
-
 🔍 **Key Features:**
 - User Authentication: Secure login and registration with JWT-based authentication.
 - Competition Management: Organizers can create, manage, and monitor competitions effortlessly.
