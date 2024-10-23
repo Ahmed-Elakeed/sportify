@@ -172,7 +172,7 @@ public class PlayerCompetitionService {
      * @throws AuthorizationException if the user does not have permission to remove the player.
      */
     private void validateRemovalPermission(PlayerCompetition playerCompetition, User user) {
-        if (!playerCompetition.getPlayer().getUserId().equals(user.getUserId())) {
+        if (!playerCompetition.getPlayer().getUserId().equals(user.getUserId()) && !playerCompetition.getCompetition().getAdmin().getUserId().equals(user.getUserId())) {
             throw new AuthorizationException("You do not have permission to remove this player from the competition.");
         }
     }
