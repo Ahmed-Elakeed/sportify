@@ -3,7 +3,9 @@ package eg.mos.sportify.domain;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import eg.mos.sportify.dto.user.UserRegistrationDTO;
 import lombok.*;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.Set;
 
@@ -83,4 +85,16 @@ public class User {
      */
     @OneToMany(mappedBy = "admin")
     private Set<Competition> createdCompetitions;
+
+
+    public static User createUser(UserRegistrationDTO userRegistrationDTO, PasswordEncoder passwordEncoder) {
+        return User.builder()
+                .username(userRegistrationDTO.getUsername())
+                .password(passwordEncoder.encode(userRegistrationDTO.getPassword()))
+                .email(userRegistrationDTO.getEmail())
+                .profilePicture(userRegistrationDTO.getProfilePicture())
+                .profile(Profile.createProfile(userRegistrationDTO))
+                .auditData(AuditData.createAuditData())
+                .build();
+    }
 }

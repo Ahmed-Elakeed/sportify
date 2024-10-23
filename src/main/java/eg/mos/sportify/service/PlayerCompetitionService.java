@@ -5,7 +5,6 @@ import eg.mos.sportify.domain.AuditData;
 import eg.mos.sportify.domain.Competition;
 import eg.mos.sportify.domain.PlayerCompetition;
 import eg.mos.sportify.domain.User;
-import eg.mos.sportify.domain.enums.CompetitionStatus;
 import eg.mos.sportify.dto.player_competition.PlayerScoreDTO;
 import eg.mos.sportify.dto.player_competition.AddPlayerCompetitionDTO;
 import eg.mos.sportify.dto.ApiResponse;
@@ -16,6 +15,8 @@ import eg.mos.sportify.exception.ValidationException;
 import eg.mos.sportify.repository.PlayerCompetitionRepository;
 import eg.mos.sportify.repository.UserRepository;
 import eg.mos.sportify.security.AuthUserDetailsService;
+import eg.mos.sportify.util.ApiResponseUtil;
+import eg.mos.sportify.validation.PlayerCompetitionValidation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -45,7 +46,7 @@ public class PlayerCompetitionService {
         User user = getCurrentUser();
         Competition competition = getCompetitionById(user, addPlayerCompetitionDTO.getCompetitionId());
 
-        validateCompetitionStatus(competition);
+        PlayerCompetitionValidation.validateCompetitionStatus(competition);
 
         User newPlayer = userRepository.findById(addPlayerCompetitionDTO.getUserId())
                 .orElseThrow(() -> new NotFoundException("Player not found"));
@@ -60,7 +61,7 @@ public class PlayerCompetitionService {
                         .build()
         );
 
-        return buildSuccessResponse("Player added to competition successfully.", "The new record ID: " + playerCompetition.getPlayerCompetitionId());
+        return ApiResponseUtil.buildSuccessResponse("Player added to competition successfully.", "The new record ID: " + playerCompetition.getPlayerCompetitionId());
     }
 
     /**
@@ -79,7 +80,7 @@ public class PlayerCompetitionService {
                 .findByUserIdAndCompetitionId(playerScoreDTO.getUserId(), playerScoreDTO.getCompetitionId())
                 .orElseThrow(() -> new NotFoundException("This player is not assigned to this competition"));
 
-        validateScore(playerScoreDTO.getScore(), competition.getMaxScore());
+        PlayerCompetitionValidation.validateScore(playerScoreDTO.getScore(), competition.getMaxScore());
 
         playerCompetition.setScore(playerScoreDTO.getScore());
         playerCompetition.setAuditData(AuditData.builder()
@@ -89,7 +90,7 @@ public class PlayerCompetitionService {
         );
         playerCompetitionRepository.save(playerCompetition);
 
-        return buildSuccessResponse("Player score updated successfully.", "The new record ID: " + playerCompetition.getPlayerCompetitionId());
+        return ApiResponseUtil.buildSuccessResponse("Player score updated successfully.", "The new record ID: " + playerCompetition.getPlayerCompetitionId());
     }
 
     /**
@@ -106,10 +107,10 @@ public class PlayerCompetitionService {
                 .orElseThrow(() -> new NotFoundException("This player is not assigned to this competition"));
 
         User user = getCurrentUser();
-        validateRemovalPermission(playerCompetition, user);
+        PlayerCompetitionValidation.validateRemovalPermission(playerCompetition, user);
 
         playerCompetitionRepository.delete(playerCompetition);
-        return buildSuccessResponse("Player removed from competition successfully.", "Deleted Successfully");
+        return ApiResponseUtil.buildSuccessResponse("Player removed from competition successfully.", "Deleted Successfully");
     }
 
     /**
@@ -137,59 +138,6 @@ public class PlayerCompetitionService {
                 .filter(c -> c.getCompetitionId().equals(competitionId))
                 .findFirst()
                 .orElseThrow(() -> new AuthorizationException("You are not authorized to access this competition"));
-    }
-
-    /**
-     * Validates the status of the competition.
-     *
-     * @param competition the competition to validate.
-     * @throws AuthorizationException if the competition is not upcoming.
-     */
-    private void validateCompetitionStatus(Competition competition) {
-        if (competition.getStatus() != CompetitionStatus.UPCOMING) {
-            throw new AuthorizationException("You can only add players to upcoming competitions.");
-        }
-    }
-
-    /**
-     * Validates the player's score against the maximum score allowed for the competition.
-     *
-     * @param score the player's score.
-     * @param maxScore the maximum allowed score for the competition.
-     * @throws ValidationException if the score exceeds the maximum score.
-     */
-    private void validateScore(int score, int maxScore) {
-        if (score > maxScore) {
-            throw new ValidationException("Score must be less than or equal to the maximum score of " + maxScore);
-        }
-    }
-
-    /**
-     * Validates if the user has permission to remove a player from a competition.
-     *
-     * @param playerCompetition the player competition record to validate.
-     * @param user the authenticated user.
-     * @throws AuthorizationException if the user does not have permission to remove the player.
-     */
-    private void validateRemovalPermission(PlayerCompetition playerCompetition, User user) {
-        if (!playerCompetition.getPlayer().getUserId().equals(user.getUserId()) && !playerCompetition.getCompetition().getAdmin().getUserId().equals(user.getUserId())) {
-            throw new AuthorizationException("You do not have permission to remove this player from the competition.");
-        }
-    }
-
-    /**
-     * Builds a successful ApiResponse with a custom message and data.
-     *
-     * @param message the success message.
-     * @param data additional data to return in the response.
-     * @return a constructed ApiResponse.
-     */
-    private ApiResponse<String> buildSuccessResponse(String message, String data) {
-        return ApiResponse.<String>builder()
-                .success(true)
-                .message(message)
-                .data(data)
-                .build();
     }
 
 

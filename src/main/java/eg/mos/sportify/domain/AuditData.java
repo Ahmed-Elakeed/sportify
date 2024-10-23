@@ -34,4 +34,11 @@ public class AuditData {
      * the entity is modified.
      */
     private LocalDateTime updatedAt;
+
+
+    public static AuditData createAuditData() {
+        return AuditData.builder()
+                .createdAt(LocalDateTime.now())
+                .build();
+    }
 }

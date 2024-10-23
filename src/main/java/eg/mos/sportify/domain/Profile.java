@@ -2,6 +2,8 @@ package eg.mos.sportify.domain;
 
 import eg.mos.sportify.domain.enums.Gender;
 import javax.persistence.*;
+
+import eg.mos.sportify.dto.user.UserRegistrationDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -83,4 +85,18 @@ public class Profile {
      */
     @Embedded
     private AuditData auditData;
+
+
+    public static Profile createProfile(UserRegistrationDTO userRegistrationDTO) {
+        return Profile.builder()
+                .firstName(userRegistrationDTO.getFirstName())
+                .lastName(userRegistrationDTO.getLastName())
+                .bio(userRegistrationDTO.getBio())
+                .dateOfBirth(userRegistrationDTO.getDateOfBirth())
+                .location(userRegistrationDTO.getLocation())
+                .gender(userRegistrationDTO.getGender())
+                .phone(userRegistrationDTO.getPhone())
+                .auditData(AuditData.createAuditData())
+                .build();
+    }
 }
