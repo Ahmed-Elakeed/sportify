@@ -10,23 +10,40 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-
+/**
+ * Service for loading user-specific data during authentication.
+ * This class implements the UserDetailsService interface to fetch user details
+ * from the database and provide them to the Spring Security framework.
+ */
 @Service
 @RequiredArgsConstructor
 public class AuthUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
+
+    /**
+     * Loads user details by username.
+     *
+     * @param username the username of the user
+     * @return UserDetails containing the user's information
+     * @throws UsernameNotFoundException if the user is not found
+     */
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user= this.userRepository.findByUsername(username)
-                .orElseThrow(()->new UsernameNotFoundException("User not found with username: " + username));
+        User user = this.userRepository.findByUsername(username)
+                .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
 
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
                 .password(user.getPassword())
-                .roles(new String[]{})
+                .roles(new String[]{})  // Adjust roles as necessary
                 .build();
     }
 
+    /**
+     * Retrieves the username from the currently authenticated user's token.
+     *
+     * @return the username of the authenticated user, or null if not authenticated
+     */
     public static String getUsernameFromToken() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !authentication.isAuthenticated()) {

@@ -5,6 +5,11 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+/**
+ * Data Transfer Object (DTO) for user authentication.
+
+ * This DTO contains the username and password required to authenticate a user during login.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor

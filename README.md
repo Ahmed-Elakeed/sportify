@@ -15,7 +15,7 @@
 - **Backend**: Java, Spring Boot
 - **Security**: JWT, Spring Security
 - **Database**: MySQL
-- **Logging**: AOP, ELK Stack (Elasticsearch, Logstash, Kibana)
+- **Logging**: AOP
 - **API Documentation**: Swagger
 - **Deployment**: Docker, AWS (EC2, S3)
 - **Build Tools**: Maven

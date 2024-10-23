@@ -20,8 +20,13 @@ import java.util.Base64;
 import java.util.Date;
 import java.util.UUID;
 
+
+/**
+ * Provider class for generating, validating, and parsing JWT tokens.
+ */
 @Component
 public class JwtTokenProvider {
+
 
     @Value("${spring.jwt.secret-key}")
     private String secretKey; // Use a strong key and keep it secure
@@ -30,16 +35,30 @@ public class JwtTokenProvider {
 
     private final UserDetailsService userDetailsService;
 
+    /**
+     * Initializes the HMAC key after the class has been constructed.
+     */
     @PostConstruct
     private void securityInit() {
         hmacKey = new SecretKeySpec(Base64.getDecoder().decode(secretKey),
                 SignatureAlgorithm.HS256.getJcaName());
     }
 
+    /**
+     * Constructs a JwtTokenProvider with the specified UserDetailsService.
+     *
+     * @param userDetailsService the service to load user details
+     */
     public JwtTokenProvider(UserDetailsService userDetailsService) {
         this.userDetailsService = userDetailsService;
     }
 
+    /**
+     * Generates a JWT token for the given user authentication data.
+     *
+     * @param userAuthenticationDTO the user authentication data
+     * @return the generated JWT token
+     */
     public String generateToken(UserAuthenticationDTO userAuthenticationDTO) {
         return Jwts.builder()
                 .claim("username", userAuthenticationDTO.getUsername())
@@ -51,23 +70,40 @@ public class JwtTokenProvider {
                 .compact();
     }
 
+    /**
+     * Resolves and retrieves the JWT token from the Authorization header of the HTTP request.
+     *
+     * @param request the HTTP request
+     * @return the JWT token, or null if not found
+     */
     public String resolveToken(HttpServletRequest request) {
         return request.getHeader("Authorization");
     }
 
+    /**
+     * Validates the given JWT token.
+     *
+     * @param token the JWT token to validate
+     * @return the status of the token (VALID, EXPIRED, or ERROR)
+     */
     public TokenStatus validateToken(String token) {
         try {
             Jwts.parserBuilder()
                     .setSigningKey(hmacKey).build().parseClaimsJws(token);
             return TokenStatus.VALID;
-        }catch (ExpiredJwtException expiredJwtException){
+        } catch (ExpiredJwtException expiredJwtException) {
             return TokenStatus.EXPIRED;
-        }
-        catch (Exception e){
+        } catch (Exception e) {
             return TokenStatus.ERROR;
         }
     }
 
+    /**
+     * Retrieves the Authentication object based on the provided JWT token.
+     *
+     * @param token the JWT token
+     * @return the Authentication object if the token is valid; null otherwise
+     */
     public Authentication getAuthentication(String token) {
         Jws<Claims> jwt = Jwts.parserBuilder()
                 .setSigningKey(hmacKey).build().parseClaimsJws(token);

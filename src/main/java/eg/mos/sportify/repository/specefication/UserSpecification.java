@@ -12,14 +12,34 @@ import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.List;
 
+
+/**
+ * Specification class for querying User entities based on search criteria.
+ * This class implements the Specification interface to enable dynamic query
+ * generation based on the properties defined in the UserSearchDTO.
+ */
 public class UserSpecification implements Specification<User> {
 
     private final UserSearchDTO userSearchDTO;
 
-    public UserSpecification(UserSearchDTO useruserSearchDTO) {
-        this.userSearchDTO = useruserSearchDTO;
+    /**
+     * Constructor for UserSpecification.
+     *
+     * @param userSearchDTO the data transfer object containing search criteria
+     */
+    public UserSpecification(UserSearchDTO userSearchDTO) {
+        this.userSearchDTO = userSearchDTO;
     }
 
+
+    /**
+     * Creates a Predicate based on the search criteria provided in the UserSearchDTO.
+     *
+     * @param root          the root entity in the query
+     * @param criteriaQuery the criteria query
+     * @param criteriaBuilder the criteria builder used to construct the query
+     * @return a Predicate representing the combined search criteria
+     */
     @Override
     public Predicate toPredicate(@NotNull Root<User> root, @NotNull CriteriaQuery<?> criteriaQuery, @NotNull CriteriaBuilder criteriaBuilder) {
         List<Predicate> predicates = new ArrayList<>();

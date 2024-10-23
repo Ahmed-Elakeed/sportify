@@ -6,6 +6,12 @@ import lombok.Data;
 
 import java.time.LocalDateTime;
 
+/**
+ * Data Transfer Object (DTO) for representing a user's competition record.
+
+ * This DTO contains details about a specific competition in which the user participated,
+ * including the competition name, start and end dates, status, the user's score, and the winning ratio.
+ */
 @Data
 @Builder
 public class UserCompetitionRecord {

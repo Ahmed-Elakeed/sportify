@@ -7,6 +7,13 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
+/**
+ * Data Transfer Object (DTO) representing user registration information.
+
+ * This class is used to encapsulate the data required for registering a new user
+ * in the Sportify application.
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
