@@ -6,7 +6,7 @@ spring:
   auth:
     white-list:  /users/register, /users/login, /swagger-resources/**, /swagger-ui.html, /v2/api-docs, /webjars/**, /swagger-ui/**
   datasource:
-    url: jdbc:mysql://mysql:3306/sportify
+    url: jdbc:mysql://localhost:3306/sportify
     username: root
     password:
     driver-class-name: com.mysql.cj.jdbc.Driver
