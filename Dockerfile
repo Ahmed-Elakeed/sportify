@@ -9,7 +9,7 @@ RUN apt-get update && \
 # Configure MySQL
 RUN service mysql start && \
     mysql -e "CREATE DATABASE sportify;" && \
-    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY '';"
+    mysql -e "ALTER USER 'root'@'localhost' IDENTIFIED BY 'root';"
 
 # Step 2: Set the working directory in the container
 WORKDIR /app
