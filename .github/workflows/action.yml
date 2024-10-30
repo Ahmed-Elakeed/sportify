@@ -4,37 +4,7 @@ on:
     branches:
       - main
 jobs:
-  build:
-    runs-on: ubuntu-latest
-    services:
-      mysql:
-        image: mysql:8.0
-        ports:
-          - 3306:3306
-        env:
-          MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: sportify
-          MYSQL_USER: root
-          MYSQL_PASSWORD: root
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
-      - name: Set up JDK 17
-        uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin' 
-      - name: Wait for MySQL
-        run: |
-          echo "Waiting for MySQL to be ready..."
-          until mysql -h mysql -u root -proot -e "SELECT 1"; do
-            sleep 1
-          done
-      - name: Build and test
-        run: |
-          ./mvnw clean install
   dockerize:
-    needs: build
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
