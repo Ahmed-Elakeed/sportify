@@ -8,7 +8,7 @@ spring:
   datasource:
     url: jdbc:mysql://mysql:3306/sportify
     username: root
-    password: root
+    password:
     driver-class-name: com.mysql.cj.jdbc.Driver
     hikari:
       maximum-pool-size: 10
