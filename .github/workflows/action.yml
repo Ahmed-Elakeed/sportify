@@ -6,6 +6,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    services:
+      mysql:
+        image: mysql:8.0
+        ports:
+          - 3306:3306
+        env:
+          MYSQL_DATABASE: sportify
+          MYSQL_USER: root
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
