@@ -24,6 +24,12 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin' 
+      - name: Wait for MySQL
+        run: |
+          echo "Waiting for MySQL to be ready..."
+          until mysql -h mysql -u root -proot -e "SELECT 1"; do
+            sleep 1
+          done
       - name: Build and test
         run: |
           ./mvnw clean install
