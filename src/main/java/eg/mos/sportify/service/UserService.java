@@ -14,6 +14,7 @@ import eg.mos.sportify.repository.UserRepository;
 import eg.mos.sportify.repository.specefication.UserSpecification;
 import eg.mos.sportify.security.JwtTokenProvider;
 import eg.mos.sportify.util.ApiResponseUtil;
+import eg.mos.sportify.util.LogUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -62,6 +63,7 @@ public class UserService {
      * @return an ApiResponse indicating success or failure of registration.
      */
     public ApiResponse<String> register(UserRegistrationDTO userRegistrationDTO) {
+        LogUtil.getInstance(UserService.class).info("Start register user: " + userRegistrationDTO.getUsername());
         if (userRepository.findByUsername(userRegistrationDTO.getUsername()).isPresent()) {
             return ApiResponseUtil.buildErrorResponse("Username is already in use", "Invalid username");
         }
