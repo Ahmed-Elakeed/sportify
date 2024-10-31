@@ -9,7 +9,7 @@ env:
   AWS_REGION: us-east-1                 # Specify your AWS region
   ECR_REPOSITORY: sportify-repo          # Replace with your ECR repository name
   IMAGE_TAG: ${{ github.sha }}
-  CLUSTER_NAME: sportify       # Replace with your ECS cluster name
+  CLUSTER_NAME: sportify-cluster      # Replace with your ECS cluster name
   SERVICE_NAME: sportify-service       # Replace with your ECS Fargate service name
 
 jobs:
@@ -42,9 +42,9 @@ jobs:
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
           docker tag $ECR_REPOSITORY:$IMAGE_TAG ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
 
-      # - name: Push Docker image to ECR
-      #   run: |
-      #     docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
+      - name: Push Docker image to ECR
+        run: |
+          docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
 
       # - name: Deploy to AWS Fargate
       #   env:
