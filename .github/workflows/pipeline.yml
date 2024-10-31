@@ -39,12 +39,12 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t sportify-app:latest .
-          docker tag sportify-app:latest public.ecr.aws/b9v4v3r1/sportify-app:latest
+          docker build -t sportify-repo:latest .
+          docker tag sportify-repo:latest public.ecr.aws/b9v4v3r1/sportify-repo:latest
 
       - name: Push Docker image to ECR
         run: |
-          docker push public.ecr.aws/b9v4v3r1/sportify-app:latest
+          docker push public.ecr.aws/b9v4v3r1/sportify-repo:latest
 
       # - name: Deploy to AWS Fargate
       #   env:
