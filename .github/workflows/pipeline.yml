@@ -48,20 +48,9 @@ jobs:
           docker push public.ecr.aws/b9v4v3r1/$ECR_REPOSITORY:$IMAGE_TAG
 
       
-      - name: Register new task definition
+      - name: Deploy to AWS Fargate
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |
-          TASK_DEF=$(aws ecs describe-task-definition --task-definition $SERVICE_NAME --query 'taskDefinition')
-          NEW_TASK_DEF=$(echo $TASK_DEF | jq --arg IMAGE "public.ecr.aws/b9v4v3r1/$ECR_REPOSITORY:$IMAGE_TAG" '.containerDefinitions[0].image=$IMAGE')
-          echo $NEW_TASK_DEF > new-task-def.json
-          aws ecs register-task-definition --cli-input-json file://new-task-def.json
-
-      
-      - name: Deploy updated task definition to ECS
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-        run: |
-          aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --task-definition $SERVICE_NAME --force-new-deployment --region $AWS_REGION
+          aws ecs update-service --cluster $CLUSTER_NAME --service $SERVICE_NAME --force-new-deployment --region $AWS_REGION
