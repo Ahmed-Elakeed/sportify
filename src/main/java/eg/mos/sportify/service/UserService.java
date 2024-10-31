@@ -63,6 +63,7 @@ public class UserService {
      * @return an ApiResponse indicating success or failure of registration.
      */
     public ApiResponse<String> register(UserRegistrationDTO userRegistrationDTO) {
+        throw new RuntimeException("Not implemented");
         LogUtil.getInstance(UserService.class).info("Start register user: " + userRegistrationDTO.getUsername());
         if (userRepository.findByUsername(userRegistrationDTO.getUsername()).isPresent()) {
             return ApiResponseUtil.buildErrorResponse("Username is already in use", "Invalid username");
