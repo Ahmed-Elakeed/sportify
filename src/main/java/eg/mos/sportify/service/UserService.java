@@ -64,16 +64,16 @@ public class UserService {
      */
     public ApiResponse<String> register(UserRegistrationDTO userRegistrationDTO) {
         throw new RuntimeException("Not implemented");
-        LogUtil.getInstance(UserService.class).info("Start register user: " + userRegistrationDTO.getUsername());
-        if (userRepository.findByUsername(userRegistrationDTO.getUsername()).isPresent()) {
-            return ApiResponseUtil.buildErrorResponse("Username is already in use", "Invalid username");
-        }
-
-        User user = User.createUser(userRegistrationDTO, passwordEncoder);
-        userRepository.save(user);
-
-        return ApiResponseUtil.buildSuccessResponse("User registered successfully",
-                "You can log in now using your username and password");
+//        LogUtil.getInstance(UserService.class).info("Start register user: " + userRegistrationDTO.getUsername());
+//        if (userRepository.findByUsername(userRegistrationDTO.getUsername()).isPresent()) {
+//            return ApiResponseUtil.buildErrorResponse("Username is already in use", "Invalid username");
+//        }
+//
+//        User user = User.createUser(userRegistrationDTO, passwordEncoder);
+//        userRepository.save(user);
+//
+//        return ApiResponseUtil.buildSuccessResponse("User registered successfully",
+//                "You can log in now using your username and password");
     }
 
     /**
