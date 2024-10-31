@@ -39,13 +39,13 @@ jobs:
 
       - name: Build Docker image
         run: |
-          docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
-          docker tag $ECR_REPOSITORY:$IMAGE_TAG public.ecr.aws/b9v4v3r1/$ECR_REPOSITORY:$IMAGE_TAG
+          docker build -t sportify-app:latest .
+          docker tag sportify-app:latest public.ecr.aws/b9v4v3r1/sportify-app:latest
 
       - name: Push Docker image to ECR
         run: |
           # docker push ${{ secrets.AWS_ACCOUNT_ID }}.dkr.ecr.$AWS_REGION.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
-          docker push public.ecr.aws/b9v4v3r1/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push public.ecr.aws/b9v4v3r1/sportify-app:latest
 
       # - name: Deploy to AWS Fargate
       #   env:
