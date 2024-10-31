@@ -8,7 +8,8 @@ on:
 env:
   AWS_REGION: us-east-1                 # Specify your AWS region
   ECR_REPOSITORY: sportify-repo          # Replace with your ECR repository name
-  IMAGE_TAG: ${{ github.sha }}
+  # IMAGE_TAG: ${{ github.sha }}
+  IMAGE_TAG: latest
   CLUSTER_NAME: sportify-cluster      # Replace with your ECS cluster name
   SERVICE_NAME: sportify-service       # Replace with your ECS Fargate service name
 
