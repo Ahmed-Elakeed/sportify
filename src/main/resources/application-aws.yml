@@ -6,7 +6,7 @@ spring:
   auth:
     white-list:  /users/register, /users/login, /swagger-resources/**, /swagger-ui.html, /v2/api-docs, /webjars/**, /swagger-ui/**
   datasource:
-    url: jdbc:mysql://sportify.cvgakoq6k9u8.us-east-1.rds.amazonaws.com:3306/sportify
+    url: jdbc:mysql://rds-mysql.cvgakoq6k9u8.us-east-1.rds.amazonaws.com:3306/sportify
     username: aws_rds_admin
     password: aws_rds_password
     driver-class-name: com.mysql.cj.jdbc.Driver
