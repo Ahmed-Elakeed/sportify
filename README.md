@@ -16,6 +16,7 @@ This project utilizes a robust technology stack, including:
 - **Docker** for containerization
 - **AWS** for cloud services
 - **Swagger** for API documentation
+- **GitHub Actions** for CI/CD
 
 Additionally, I've implemented an **AOP logging system**, a **global exception handler** with custom exceptions, and **event listeners** to enhance functionality and maintainability.
 
