@@ -41,11 +41,11 @@ jobs:
       - name: Build Docker image
         run: |
           docker build -t $ECR_REPOSITORY:$IMAGE_TAG .
-          docker tag $ECR_REPOSITORY:$IMAGE_TAG public.ecr.aws/b9v4v3r1/$ECR_REPOSITORY:$IMAGE_TAG
+          docker tag $ECR_REPOSITORY:$IMAGE_TAG 767397660949.dkr.ecr.us-east-1.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
 
       - name: Push Docker image to ECR
         run: |
-          docker push public.ecr.aws/b9v4v3r1/$ECR_REPOSITORY:$IMAGE_TAG
+          docker push 767397660949.dkr.ecr.us-east-1.amazonaws.com/$ECR_REPOSITORY:$IMAGE_TAG
 
       
       - name: Deploy to AWS Fargate
