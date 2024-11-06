@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SportifyApplication {
 
     public static void main(String[] args) {
-        LogUtil.getInstance(SportifyApplication.class).info("SportifyApplication started");
+        LogUtil.getInstance(SportifyApplication.class).info("SportifyApplication started V1");
         SpringApplication.run(SportifyApplication.class, args);
     }
 
