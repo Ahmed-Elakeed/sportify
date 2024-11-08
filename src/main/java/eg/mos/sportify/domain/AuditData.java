@@ -26,7 +26,7 @@ public class AuditData {
      * The timestamp when the entity was created.
      * Automatically set to the current date and time upon creation.
      */
-    private LocalDateTime createdAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
 
     /**
      * The timestamp when the entity was last updated.
@@ -34,11 +34,4 @@ public class AuditData {
      * the entity is modified.
      */
     private LocalDateTime updatedAt;
-
-
-    public static AuditData createAuditData() {
-        return AuditData.builder()
-                .createdAt(LocalDateTime.now())
-                .build();
-    }
 }

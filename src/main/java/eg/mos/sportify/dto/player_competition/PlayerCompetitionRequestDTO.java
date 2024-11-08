@@ -1,7 +1,6 @@
 package eg.mos.sportify.dto.player_competition;
 
 
-import eg.mos.sportify.domain.enums.PlayerRole;
 import lombok.*;
 
 /**
@@ -14,9 +13,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AddPlayerCompetitionDTO {
-
+public class PlayerCompetitionRequestDTO {
     private Long competitionId;
     private Long userId;
-    private PlayerRole role;
 }

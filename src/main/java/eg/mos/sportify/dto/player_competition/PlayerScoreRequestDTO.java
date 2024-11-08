@@ -15,7 +15,7 @@ import javax.validation.constraints.Min;
  */
 @Data
 @Builder
-public class PlayerScoreDTO {
+public class PlayerScoreRequestDTO {
     private Long userId;
     private Long competitionId;
     @Min(value = 0, message = "Score must be zero or more")

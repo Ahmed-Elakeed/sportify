@@ -21,12 +21,11 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-public class AddCompetitionDTO {
+public class CompetitionRequestDTO {
     private String name;
     private String description;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
     private Integer maxScore;
     private CompetitionStatus status = CompetitionStatus.UPCOMING;
-    private Long userId;
 }

@@ -1,6 +1,7 @@
 package eg.mos.sportify.security;
 
 import eg.mos.sportify.domain.User;
+import eg.mos.sportify.exception.NotFoundException;
 import eg.mos.sportify.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
@@ -19,6 +20,7 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
+    private static User authenticatedUser = null;
 
     /**
      * Loads user details by username.
@@ -31,6 +33,7 @@ public class AuthUserDetailsService implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         User user = this.userRepository.findByUsername(username)
                 .orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+        authenticatedUser = user;
 
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getUsername())
@@ -56,5 +59,15 @@ public class AuthUserDetailsService implements UserDetailsService {
         } else {
             return principal.toString();
         }
+    }
+
+    /**
+     * Retrieves the currently authenticated user.
+     *
+     * @return the authenticated User.
+     * @throws NotFoundException if the user cannot be found.
+     */
+    public static User getCurrentUser() {
+        return authenticatedUser;
     }
 }

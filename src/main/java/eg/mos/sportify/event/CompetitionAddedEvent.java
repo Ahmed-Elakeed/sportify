@@ -1,6 +1,5 @@
 package eg.mos.sportify.event;
 
-import eg.mos.sportify.domain.enums.PlayerRole;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.context.ApplicationEvent;
@@ -15,7 +14,6 @@ import org.springframework.context.ApplicationEvent;
 public class CompetitionAddedEvent extends ApplicationEvent {
     private Long competitionId;
     private Long userId;
-    private PlayerRole playerRole;
 
     /**
      * Constructs a new CompetitionAddedEvent.
@@ -23,12 +21,10 @@ public class CompetitionAddedEvent extends ApplicationEvent {
      * @param source the object that published the event (typically the source of the event)
      * @param competitionId the ID of the competition that was added
      * @param userId the ID of the user associated with the competition
-     * @param playerRole the role of the player in the competition
      */
-    public CompetitionAddedEvent(Object source, Long competitionId, Long userId, PlayerRole playerRole) {
+    public CompetitionAddedEvent(Object source, Long competitionId, Long userId) {
         super(source);
         this.competitionId = competitionId;
         this.userId = userId;
-        this.playerRole = playerRole;
     }
 }

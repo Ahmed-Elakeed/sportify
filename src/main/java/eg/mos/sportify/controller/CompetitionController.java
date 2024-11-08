@@ -1,9 +1,10 @@
 package eg.mos.sportify.controller;
 
 
-import eg.mos.sportify.dto.competition.AddCompetitionDTO;
+import eg.mos.sportify.dto.competition.CompetitionRequestDTO;
 import eg.mos.sportify.dto.ApiResponse;
 import eg.mos.sportify.dto.competition.CompetitionChangeStatusDTO;
+import eg.mos.sportify.dto.competition.CompetitionResponseDTO;
 import eg.mos.sportify.service.CompetitionService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -27,15 +28,15 @@ public class CompetitionController {
     /**
      * Endpoint to add a new competition.
 
-     * This method accepts a {@link AddCompetitionDTO} object and adds
+     * This method accepts a {@link CompetitionRequestDTO} object and adds
      * the competition using the service layer.
      *
-     * @param addCompetitionDTO DTO containing competition details.
+     * @param competitionRequestDTO DTO containing competition details.
      * @return ResponseEntity containing an {@link ApiResponse} with a success message.
      */
     @PostMapping
-    public ResponseEntity<ApiResponse<String>> addCompetition(@RequestBody AddCompetitionDTO addCompetitionDTO) {
-        return ResponseEntity.ok(this.competitionService.addCompetition(addCompetitionDTO));
+    public ResponseEntity<ApiResponse<CompetitionResponseDTO>> addCompetition(@RequestBody CompetitionRequestDTO competitionRequestDTO) {
+        return ResponseEntity.ok(this.competitionService.addCompetition(competitionRequestDTO));
     }
 
 
@@ -49,7 +50,7 @@ public class CompetitionController {
      * @return ResponseEntity containing an {@link ApiResponse} with a success message.
      */
     @PutMapping("/change-status")
-    public ResponseEntity<ApiResponse<String>> changeCompetitionStatus(@RequestBody CompetitionChangeStatusDTO competitionChangeStatusDTO){
+    public ResponseEntity<ApiResponse<CompetitionResponseDTO>> changeCompetitionStatus(@RequestBody CompetitionChangeStatusDTO competitionChangeStatusDTO){
         return ResponseEntity.ok(this.competitionService.changeCompetitionStatus(competitionChangeStatusDTO));
     }
 }

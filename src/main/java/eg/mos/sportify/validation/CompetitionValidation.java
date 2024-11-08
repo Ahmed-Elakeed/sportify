@@ -1,7 +1,6 @@
 package eg.mos.sportify.validation;
 
 import eg.mos.sportify.domain.Competition;
-import eg.mos.sportify.domain.User;
 import eg.mos.sportify.exception.AuthorizationException;
 import eg.mos.sportify.security.AuthUserDetailsService;
 
@@ -23,16 +22,4 @@ public class CompetitionValidation {
         }
     }
 
-    /**
-     * Validates that the authenticated user is allowed to add a competition.
-     *
-     * @param user the user to validate.
-     * @throws AuthorizationException if the authenticated user is not the same as the user attempting to add the competition.
-     */
-    public static void validateUserAuthorization(User user) {
-        String currentAuthenticatedUsername = AuthUserDetailsService.getUsernameFromToken();
-        if (!Objects.equals(currentAuthenticatedUsername, user.getUsername())) {
-            throw new AuthorizationException("User can only add competitions for themselves.");
-        }
-    }
 }

@@ -5,7 +5,6 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import eg.mos.sportify.domain.enums.CompetitionStatus;
 import javax.persistence.*;
 
-import eg.mos.sportify.dto.competition.AddCompetitionDTO;
 import lombok.*;
 
 import java.time.LocalDateTime;
@@ -90,25 +89,4 @@ public class Competition {
      */
     @Embedded
     private AuditData auditData;
-
-
-    /**
-     * Creates a Competition entity from the provided DTO and user.
-     *
-     * @param addCompetitionDTO the DTO containing competition details.
-     * @param user the user who is adding the competition.
-     * @return a newly created Competition entity.
-     */
-    public static Competition createCompetition(AddCompetitionDTO addCompetitionDTO, User user) {
-        return Competition.builder()
-                .name(addCompetitionDTO.getName())
-                .description(addCompetitionDTO.getDescription())
-                .startDate(addCompetitionDTO.getStartDate())
-                .endDate(addCompetitionDTO.getEndDate())
-                .maxScore(addCompetitionDTO.getMaxScore())
-                .status(addCompetitionDTO.getStatus())
-                .admin(user)
-                .auditData(new AuditData())
-                .build();
-    }
 }

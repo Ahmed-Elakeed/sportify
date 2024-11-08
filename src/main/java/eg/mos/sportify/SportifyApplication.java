@@ -8,8 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 public class SportifyApplication {
 
     public static void main(String[] args) {
-        LogUtil.getInstance(SportifyApplication.class).info("SportifyApplication started V1");
-        LogUtil.getInstance(SportifyApplication.class).info("New logs for testing");
+        LogUtil.getInstance(SportifyApplication.class).info("SportifyApplication started");
         SpringApplication.run(SportifyApplication.class, args);
     }
 
