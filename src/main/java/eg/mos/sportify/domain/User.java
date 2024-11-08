@@ -2,7 +2,7 @@ package eg.mos.sportify.domain;
 
 import javax.persistence.*;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.*;
 
 import java.util.Set;
@@ -50,7 +50,6 @@ public class User {
      * Cannot be null.
      */
     @Column(nullable = false)
-    @JsonIgnore
     private String password;
 
     /**
