@@ -1,6 +1,12 @@
 package eg.mos.sportify.security;
 
 
+import com.amazonaws.services.secretsmanager.AWSSecretsManager;
+import com.amazonaws.services.secretsmanager.AWSSecretsManagerClientBuilder;
+import com.amazonaws.services.secretsmanager.model.GetSecretValueRequest;
+import com.amazonaws.services.secretsmanager.model.GetSecretValueResult;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import eg.mos.sportify.dto.user.UserAuthenticationDTO;
 import io.jsonwebtoken.*;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,8 +34,11 @@ import java.util.UUID;
 public class JwtTokenProvider {
 
 
-    @Value("${spring.jwt.secret-key}")
-    private String secretKey; // Use a strong key and keep it secure
+    @Value("${spring.jwt.secret-name}")
+    private String secretName; // Use a strong key and keep it secure
+
+    @Value("${spring.cloud.aws.region.static}")
+    private String secretRegion;
 
     private static Key hmacKey;
 
@@ -40,8 +49,25 @@ public class JwtTokenProvider {
      */
     @PostConstruct
     private void securityInit() {
-        hmacKey = new SecretKeySpec(Base64.getDecoder().decode(secretKey),
+        JsonObject secretJson = JsonParser.parseString(this.getSecret(secretName)).getAsJsonObject();
+        String encodedKey = secretJson.get("secret").getAsString();
+        hmacKey = new SecretKeySpec(Base64.getDecoder().decode(encodedKey),
                 SignatureAlgorithm.HS256.getJcaName());
+    }
+
+    /**
+     * Fetching JWT secret from AWS secret manager by secret name for the specified region
+     * @param secretName
+     * @return JSON Object with the JWT secret value
+     */
+    private String getSecret(String secretName) {
+        AWSSecretsManager client = AWSSecretsManagerClientBuilder.standard()
+                .withRegion(secretRegion)
+                .build();
+        GetSecretValueRequest getSecretValueRequest = new GetSecretValueRequest()
+                .withSecretId(secretName);
+        GetSecretValueResult getSecretValueResult = client.getSecretValue(getSecretValueRequest);
+        return getSecretValueResult.getSecretString();
     }
 
     /**
