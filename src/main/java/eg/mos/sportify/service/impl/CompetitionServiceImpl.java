@@ -48,7 +48,7 @@ public class CompetitionServiceImpl implements CompetitionService {
         competition.setAdmin(user);
         Competition savedCompetition = competitionRepository.save(competition);
 
-        eventPublisher.publishEvent(new CompetitionAddedEvent(this, competition.getCompetitionId(),user.getUserId()));
+        eventPublisher.publishEvent(new CompetitionAddedEvent(this, savedCompetition.getCompetitionId(),user.getUserId()));
 
         return ApiResponseUtil.buildSuccessResponse("User with ID: " + user.getUserId() + " added a competition successfully.", CompetitionMapper.competitionTOCompetitionResponseDTO(savedCompetition));
     }
