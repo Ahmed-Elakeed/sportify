@@ -6,11 +6,34 @@ import eg.mos.sportify.dto.profile.ProfileDTO;
 
 import java.time.LocalDateTime;
 
+
+
+/**
+ * Utility class for mapping between Profile domain objects and DTOs.
+ * <p>
+ * This class provides static methods to convert between {@link ProfileDTO}
+ * and {@link Profile}.
+ * </p>
+ * <p>
+ * The class is designed to be used as a utility and is not meant for instantiation.
+ * </p>
+ */
 public class ProfileMapper {
 
+    /**
+     * Private constructor to prevent instantiation.
+     * This class is intended to be used as a utility class with static methods only.
+     */
     private ProfileMapper() {
     }
 
+
+    /**
+     * Maps a {@link ProfileDTO} to a {@link Profile}.
+     *
+     * @param profileDTO the DTO containing profile data from the client.
+     * @return a {@link Profile} entity initialized with the data from the DTO.
+     */
     public static Profile profileDTOTOProfile(ProfileDTO profileDTO) {
         return Profile.builder()
                 .firstName(profileDTO.getFirstName())
@@ -27,6 +50,13 @@ public class ProfileMapper {
                 .build();
     }
 
+
+    /**
+     * Maps a {@link Profile} entity to a {@link ProfileDTO}.
+     *
+     * @param profile the {@link Profile} entity containing profile data.
+     * @return a {@link ProfileDTO} initialized with the data from the entity.
+     */
     public static ProfileDTO profileTOProfileDTO(Profile profile) {
         return ProfileDTO.builder()
                 .firstName(profile.getFirstName())
