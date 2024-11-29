@@ -52,7 +52,7 @@ public class PlayerCompetitionController {
      * @return ResponseEntity containing an {@link ApiResponse} with a success message.
      */
     @PutMapping("/score")
-    public ResponseEntity<ApiResponse<String>> updatePLayerScore(@RequestBody @Valid PlayerScoreRequestDTO playerScoreRequestDTO){
+    public ResponseEntity<ApiResponse<String>> updatePlayerScore(@RequestBody @Valid PlayerScoreRequestDTO playerScoreRequestDTO){
         return ResponseEntity.ok(this.playerCompetitionService.updatePlayerScore(playerScoreRequestDTO));
     }
 
