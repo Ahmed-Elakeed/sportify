@@ -22,6 +22,8 @@ Additionally, I've implemented an **AOP logging system**, a **global exception h
 
 
 **ER Diagram**
+
+
 ![Screenshot 2024-12-01 at 8 54 20 PM](https://github.com/user-attachments/assets/7d7c08de-6fef-4091-bc7d-e7b04646cc81)
 
 
