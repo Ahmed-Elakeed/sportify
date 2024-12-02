@@ -45,13 +45,14 @@ This project employs a **Layered Architecture** to ensure modularity, scalabilit
 
 
 **Run and Deployment Instructions**
+
 **--Running Locally--**
 
 1- Clone the Repository
-Clone this project to your local machine using the following command:
-git clone <repository-url>
-Then, navigate into the project directory:
-cd <repository-name>
+  Clone this project to your local machine using the following command:
+  git clone <repository-url>
+  Then, navigate into the project directory:
+  cd <repository-name>
 
 2- Set Up the Database
   - Create a database with the same name as specified in the application.properties file.
