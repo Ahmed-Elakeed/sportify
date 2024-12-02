@@ -31,6 +31,11 @@ Additionally, I've implemented an **AOP logging system**, a **global exception h
 ![Screenshot 2024-12-01 at 9 19 34 PM](https://github.com/user-attachments/assets/9222a8ea-be5f-4e55-b996-564832434f9a)
 
 
+**Use Case Diagram**
+
+<img width="551" alt="Screenshot 2024-12-01 at 9 32 43 PM" src="https://github.com/user-attachments/assets/b52bf1a5-302c-4905-91a3-a27777bd28d7">
+
+
 📝 **Future Improvements:**
 - Implementing real-time notifications for competition updates.
 - Integrating a chat feature for player interaction.
