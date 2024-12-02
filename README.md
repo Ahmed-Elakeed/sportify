@@ -36,12 +36,15 @@ Additionally, I've implemented an **AOP logging system**, a **global exception h
 <img width="551" alt="Screenshot 2024-12-01 at 9 32 43 PM" src="https://github.com/user-attachments/assets/b52bf1a5-302c-4905-91a3-a27777bd28d7">
 
 
+
+**Architecture**
 This project employs a **Layered Architecture** to ensure modularity, scalability, and a clear separation of concerns. The architecture consists of distinct layers: the Controller layer handles HTTP requests and serves as the entry point; the Service layer contains business logic and coordinates data processing; and the Repository layer manages data persistence using Spring Data JPA. Core domain models reside in the Domain layer, while DTOs facilitate data transfer between layers. Supporting packages include Mapper for data transformation, Validation for enforcing business rules, Security for authentication and authorization, Exception for error handling, Util for reusable utilities, and AOP for Aspect-Oriented Programming to provide logging and cross-cutting concerns. This design ensures clean, maintainable, and secure code that adheres to industry best practices.
 
 <img width="253" alt="Screenshot 2024-12-01 at 9 39 39 PM" src="https://github.com/user-attachments/assets/3f07a1c1-6514-46c1-9893-25ed2a7af1a3">
 
 
 **Run and Deployment Instructions**
+
 **--Running Locally--**
 1- Clone the Repository
 Clone this project to your local machine using the following command:
@@ -63,6 +66,7 @@ cd <repository-name>
 
 
 **Cloud Deployment**
+
 1- Set Up AWS Resources
   - Create the following AWS resources as specified in the GitHub Actions CI/CD pipeline file:
     - Amazon RDS: Create a database instance with the name and settings defined in the application.properties file or CI/CD configuration.
