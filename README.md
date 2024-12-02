@@ -20,6 +20,11 @@ This project utilizes a robust technology stack, including:
 
 Additionally, I've implemented an **AOP logging system**, a **global exception handler** with custom exceptions, and **event listeners** to enhance functionality and maintainability.
 
+
+**ER Diagram**
+![Screenshot 2024-12-01 at 8 54 20 PM](https://github.com/user-attachments/assets/7d7c08de-6fef-4091-bc7d-e7b04646cc81)
+
+
 📝 **Future Improvements:**
 - Implementing real-time notifications for competition updates.
 - Integrating a chat feature for player interaction.
