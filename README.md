@@ -41,6 +41,55 @@ This project employs a **Layered Architecture** to ensure modularity, scalabilit
 <img width="253" alt="Screenshot 2024-12-01 at 9 39 39 PM" src="https://github.com/user-attachments/assets/3f07a1c1-6514-46c1-9893-25ed2a7af1a3">
 
 
+**Run and Deployment Instructions**
+**--Running Locally--**
+1- Clone the Repository
+Clone this project to your local machine using the following command:
+git clone <repository-url>
+Then, navigate into the project directory:
+cd <repository-name>
+
+2- Set Up the Database
+  - Create a database with the same name as specified in the application.properties file.
+  - Configure the database connection settings (username, password, and URL) in the application.properties file located in the src/main/resources directory.
+    
+3- Build and Run the Project
+  - Ensure you have Java and Maven installed on your machine.
+  - Build the project using the command:
+    mvn clean install
+  - Run the project:
+    mvn spring-boot:run
+    The application will start on http://localhost:8080.
+
+
+**Cloud Deployment**
+1- Set Up AWS Resources
+  - Create the following AWS resources as specified in the GitHub Actions CI/CD pipeline file:
+    - Amazon RDS: Create a database instance with the name and settings defined in the application.properties file or CI/CD configuration.
+    - Amazon ECR: Create a container registry for the application image.
+    - Amazon ECS Fargate: Set up a cluster and task definition to run the application.
+
+2- Choose the AWS Profile Locally
+  - Ensure you have AWS CLI configured with an appropriate profile for deploying the application. Set the profile in the application code.
+    
+3- Push Code to Repository
+  - After making changes locally and committing them, push the code to the repository:
+    git add .
+    git commit -m "Your commit message"
+    git push
+    
+4- Automatic CI/CD Deployment
+  - The CI/CD pipeline configured in GitHub Actions will automatically:
+    - Build the project.
+    - Run tests.
+    - Build and push the Docker image to Amazon ECR.
+    - Deploy the application to AWS ECS Fargate.
+    - Update the RDS connection as per the configurations provided.
+
+5- Monitor Deployment
+  - You can monitor the deployment logs and pipeline status in the GitHub Actions tab of your repository.
+
+
 📝 **Future Improvements:**
 - Implementing real-time notifications for competition updates.
 - Integrating a chat feature for player interaction.
