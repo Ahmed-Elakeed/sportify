@@ -11,7 +11,7 @@ env:
   # IMAGE_TAG: ${{ github.sha }}
   IMAGE_TAG: latest
   CLUSTER_NAME: sportify-cluster      # Replace with your ECS cluster name
-  SERVICE_NAME: sportify-service       # Replace with your ECS Fargate service name
+  SERVICE_NAME: sportify-luster-service       # Replace with your ECS Fargate service name
 
 jobs:
   build:
