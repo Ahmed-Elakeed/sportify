@@ -7,7 +7,7 @@ spring:
     white-list:  /users/register, /users/login, /swagger-resources/**, /swagger-ui.html, /v2/api-docs, /webjars/**, /swagger-ui/**
   datasource:
     url: jdbc:mysql://rds-mysql.cvgakoq6k9u8.us-east-1.rds.amazonaws.com:3306/sportify
-    username: aws_rds_admin
+    username: aws_rds_username
     password: aws_rds_password
     driver-class-name: com.mysql.cj.jdbc.Driver
   jpa:
@@ -17,7 +17,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        dialect: org.hibernate.dialect.MySQL8Dialect
+        dialect: org.hibernate.dialect.MySQLDialect
   mvc:
     path match:
       matching-strategy: ANT_PATH_MATCHER
